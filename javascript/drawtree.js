@@ -59,7 +59,7 @@ function print_canvas(n,target){
 }
 
 function print_table(header,x,y,target,caption,id){
-  var div = $('<div class="table-responsive" style="display:none">');
+  var div = $('<div class="table-responsive">');
   div.attr('id',id);
   div.append($('<h1>').html(caption));
   div.append($('<p class="help-block">').html('※左右にスクロールできます'));
