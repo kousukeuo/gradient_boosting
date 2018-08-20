@@ -156,8 +156,9 @@
             *   TreeData(trees[i],"#tree"+i);
             * }*/
 
-
+           $('#tree').html('');
            for(var j = 0; j < estimator["nEstimators"]; j++){
+             $('#tree').append(`<h2>tree[${j}]</h2>`);
              $('#tree').append(`<svg id="tree${j}" width="1000" height="1000"></svg>`);
              // 2. 描画用データの準備
              var width = document.querySelector(`#tree${j}`).clientWidth;
@@ -211,7 +212,7 @@
                  .on("click", function(d) {
                    toggle(d);
                    update(d,
-                     d.parent ? d.parent.root : d.root,
+                          d.parent ? d.parent.root : d.root,
                           d.parent ? d.parent.g : d.g,
                           d.parent ? d.parent.tree : d.tree
                    );
@@ -326,6 +327,15 @@
 
 
     <style>
+     h2 {
+       width: 150px;
+       padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
+       color: #494949;/*文字色*/
+       background: #f4f4f4;/*背景色*/
+       border-left: solid 5px #7db4e6;/*左線*/
+       border-bottom: solid 3px #d7d7d7;/*下線*/
+       border-right: solid 5px #7db4e6;/*左線*/
+     }
      .node {
        cursor: pointer;
      }
