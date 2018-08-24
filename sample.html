@@ -59,13 +59,15 @@
 
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-6" id="data">ここに使われたデータが表示されます</div>
+          <div class="col-md-6">
+            <div id ="buttons">ここに使われたデータが表示されます</div>
+            <div id ="data"></div>
+          </div>
+
           <div class="col-md-6" id="tree">ここに木が表示されます</div>
         </div>
       </div>
     </main>
-
-    <svg width="800" height="600"></svg>
 
     <script>
      var header;
@@ -123,7 +125,7 @@
            testY = y.slice(end);
 
            // 回帰木 100個, 学習率 0.1, 回帰木の深さ 3で学習
-           estimator = new GradientBoostingRegressor(10, 0.1, 3);
+           estimator = new GradientBoostingRegressor(10, 0.1, 4);
            // train
            estimator.fit(trainX, trainY);
 
@@ -132,19 +134,23 @@
            predY = estimator.predict(testX);
 
            //使われた学習データ、テストデータを表示
-           $('#data').html('<button class="btn btn-success" id="btnTrain">学習データを表示/非表示</button>');
-           $('#data').append('<button class="btn btn-success float-right" id="btnTest">テストデータを表示/非表示</button>');
-
+           $('#buttons').html('<button class="btn btn-success" id="btnTrain">学習データを表示</button>');
+           $('#buttons').append('<button class="btn btn-success float-right" id="btnTest">テストデータを表示</button>');
            print_table(header,trainX,trainY,'#data','学習データ','train');
-           print_table(header,testX,testY,'#data','テストデータ','test');
+
+
 
            //表示非表示を切り替え
            $(function(){
              $("#btnTrain").click(function(){
-               $("#train").toggle();
+               $('#data').html('');
+               print_table(header,trainX,trainY,'#data','学習データ','train');
              });
              $("#btnTest").click(function(){
-               $("#test").toggle();
+
+               $('#data').html('');
+               print_table(header,testX,testY,'#data','テストデータ','test');
+
              });
            });
 
@@ -159,7 +165,7 @@
            $('#tree').html('');
            for(var j = 0; j < estimator["nEstimators"]; j++){
              $('#tree').append(`<h2>tree[${j}]</h2>`);
-             $('#tree').append(`<svg id="tree${j}" width="1000" height="1000"></svg>`);
+             $('#tree').append(`<svg id="tree${j}" width="900" height="500"></svg>`);
              // 2. 描画用データの準備
              var width = document.querySelector(`#tree${j}`).clientWidth;
              var height = document.querySelector(`#tree${j}`).clientHeight;

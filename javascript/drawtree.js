@@ -59,6 +59,7 @@ function print_canvas(n,target){
 }
 
 function print_table(header,x,y,target,caption,id){
+
   var div = $('<div class="table-responsive">');
   div.attr('id',id);
   div.append($('<h1>').html(caption));
